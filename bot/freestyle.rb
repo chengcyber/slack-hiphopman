@@ -32,6 +32,7 @@ client.on :message do |data|
   #   client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
   when /^<@#{client.self.id}>\s*(.*)/ then
     keyword = data.text.match(/^<@#{client.self.id}\s*(.*)/).captures[0] || ''
+    puts "keyword: #{keyword}"
 
     targetUrl = "http://m.niucodata.com/freestyle/freestyle.php?key=#{keyword}"
     doc = Nokogiri::HTML(open(targetUrl))
@@ -42,6 +43,7 @@ client.on :message do |data|
     freestyleText = content[startIndex...endIndex]
     freestyle = freestyleText.gsub("\n", '')
 
+    puts freestyle
 
     client.message channel: data.channel, text: "#{freestyle}"
   end
@@ -55,4 +57,7 @@ end
 #   puts 'Connection has been disconnected.'
 # end
 
-client.start!
+# client.start!
+
+@client = client
+
