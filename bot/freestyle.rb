@@ -3,8 +3,6 @@ require 'slack-ruby-client'
 require 'nokogiri'
 require 'open-uri'
 
-require 'byebug'
-
 Slack.configure do |config|
   config.token = ENV['SLACK_API_TOKEN']
   config.logger = Logger.new(STDOUT)
