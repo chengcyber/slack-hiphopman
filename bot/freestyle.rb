@@ -34,7 +34,7 @@ client.on :message do |data|
     keyword = data.text.match(/^<@#{client.self.id}\s*(.*)/).captures[0] || ''
     puts "keyword: #{keyword}"
 
-    targetUrl = "http://m.niucodata.com/freestyle/freestyle.php?key=#{keyword}"
+    targetUrl = "http://m.niucodata.com/freestyle/freestyle.php?key=#{CGI::escape(keyword)}"
     doc = Nokogiri::HTML(open(targetUrl))
 
     content = doc.css('div.mdui-container').text
